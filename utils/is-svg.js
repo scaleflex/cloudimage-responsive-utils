@@ -1,0 +1,1 @@
+export const isSVG = url => url.slice(-4).toLowerCase() === '.svg';
