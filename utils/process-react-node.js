@@ -11,7 +11,7 @@ import {
 } from './';
 
 
-export const processReactNode = (props, imgNode, isUpdate, windowScreenBecomesBigger) => {
+export const processReactNode = (props, imgNode, isUpdate, windowScreenBecomesBigger, lowQualityPreview = true) => {
   const imgProps = getProps(props);
   const { imgNodeSRC, params, sizes, adaptive } = imgProps;
   const { config } = props;
@@ -30,7 +30,7 @@ export const processReactNode = (props, imgNode, isUpdate, windowScreenBecomesBi
 
   const containerProps = determineContainerProps({ imgNode, config, size, ...imgProps });
   const { width, height } = containerProps;
-  const preview = isLowQualityPreview(adaptive, width, svg);
+  const preview = lowQualityPreview && isLowQualityPreview(adaptive, width, svg);
   const cloudimgURL = !adaptive && svg ? src : generateURL({ src, params, config, width, height });
 
   if (preview) {
