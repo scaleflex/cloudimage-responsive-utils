@@ -5,6 +5,7 @@ import { getPreviewSRC } from './get-preview-src';
 import { getSizeLimit } from './get-size-limit';
 import { getParentContainerSize } from './get-parent-container-size';
 import { getWidth } from './get-width';
+import { getHeight } from './get-height';
 import { getRatio } from './get-ratio';
 import { isSVG } from './is-svg';
 import { isLowQualityPreview } from './is-low-quality-preview';
@@ -22,6 +23,7 @@ export {
   getSizeLimit,
   getParentContainerSize,
   getWidth,
+  getHeight,
   getRatio,
   isSVG,
   isLowQualityPreview,

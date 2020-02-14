@@ -5,6 +5,8 @@ export const convertToPX = (size = '') => {
     return parseInt(size);
   } else if (size.indexOf('%') > -1) {
     // todo calculate container width * %
+    // todo could be the potenial problem when the plugin set 100% width and on update it can calculate wrong value
+    return null;
   } else if (size.indexOf('vw') > -1) {
     return window.innerWidth * parseInt(size) / 100;
   } else if (size.indexOf('vh') > -1) {

@@ -55,7 +55,7 @@ const extractBaseURLFromString = (path = '') => {
   return protocol + '//' + host;
 };
 
-export const isRelativeUrlPath = src => {
+const isRelativeUrlPath = src => {
   if (!src) return false;
 
   if (src.indexOf('//') === 0) {
