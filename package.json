@@ -1,8 +1,8 @@
 {
   "name": "cloudimage-responsive-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "cloudimage responsive utils",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "clean-dist": "rm -rf dist",
     "dist": "npm run clean-dist && babel utils -d dist --copy-files"
