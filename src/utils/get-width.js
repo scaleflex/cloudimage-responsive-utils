@@ -1,4 +1,4 @@
-import { convertToPX, getSizeLimit, getParentContainerSize } from './';
+import { convertToPX, getSizeLimit, getParentContainerSize } from '../index';
 
 /**
  * Get width for an image.

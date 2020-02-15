@@ -1,4 +1,4 @@
-import { generateURL } from './';
+import { generateURL } from '../index';
 
 
 export const getPreviewSRC = ({ config, width, height, params, src }) => {

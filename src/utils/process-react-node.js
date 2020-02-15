@@ -8,7 +8,7 @@ import {
   getWidth,
   isLowQualityPreview,
   processParams
-} from './';
+} from '../index';
 
 
 export const processReactNode = (props, imgNode, isUpdate, windowScreenBecomesBigger, lowQualityPreview = true) => {

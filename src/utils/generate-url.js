@@ -1,4 +1,4 @@
-import { processParams } from './';
+import { processParams } from '../index';
 
 
 export const generateURL = props => {

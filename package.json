@@ -1,11 +1,11 @@
 {
   "name": "cloudimage-responsive-utils",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "cloudimage responsive utils",
   "main": "dist/index.js",
   "scripts": {
     "clean-dist": "rm -rf dist",
-    "dist": "npm run clean-dist && babel utils -d dist --copy-files"
+    "dist": "npm run clean-dist && babel src/utils -d dist --copy-files"
   },
   "repository": {
     "type": "git",
