@@ -1,4 +1,4 @@
-if (!window.Uint8ClampedArray && window.Uint8Array && window.ImageData) {
+if (window && !window.Uint8ClampedArray && window.Uint8Array && window.ImageData) {
   window.Uint8ClampedArray = function(input,arg1,arg2) {
     var len = 0;
     if (typeof input == "undefined") { }
