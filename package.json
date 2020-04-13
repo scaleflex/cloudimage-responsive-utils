@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "clean-dist": "rm -rf dist",
-    "dist": "npm run clean-dist && babel src/utils -d dist --copy-files"
+    "dist": "npm run clean-dist && babel src -d dist --copy-files"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,7 @@
     "url": "https://github.com/scaleflex/cloudimage-responsive-utils/issues"
   },
   "homepage": "https://github.com/scaleflex/cloudimage-responsive-utils#readme",
-  "dependencies": {
+  "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
