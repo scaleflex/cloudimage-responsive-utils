@@ -1,1 +1,5 @@
-export const isLowQualityPreview = (adaptive, width, svg) => adaptive ? width > 400 : width > 400 && !svg;
+export const isLowQualityPreview = (adaptive, width, svg, minLowQualityWidth) =>
+  adaptive ?
+    width > minLowQualityWidth
+    :
+    width > minLowQualityWidth && !svg;

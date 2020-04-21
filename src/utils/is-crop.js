@@ -1,0 +1,1 @@
+export const isCrop = func => ['crop', 'fit', 'bound', 'cover'].includes(func);

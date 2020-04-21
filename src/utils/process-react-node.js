@@ -6,16 +6,18 @@ import {
   getPreviewSRC,
   getRatio,
   getWidth,
+  getSizeLimit,
   isLowQualityPreview,
+  isCrop,
   processParams
-} from '../index';
+} from '../';
 
 
 export const processReactNode = (props, imgNode, isUpdate, windowScreenBecomesBigger, lowQualityPreview = true) => {
   const imgProps = getProps(props);
   const { imgNodeSRC, params, sizes, adaptive } = imgProps;
   const { config } = props;
-  const { baseURL, presets } = config;
+  const { baseURL, presets, minLowQualityWidth } = config;
 
   if (!imgNodeSRC) return;
 
@@ -29,12 +31,12 @@ export const processReactNode = (props, imgNode, isUpdate, windowScreenBecomesBi
   }
 
   const containerProps = determineContainerProps({ imgNode, config, size, ...imgProps });
-  const { width, height } = containerProps;
-  const preview = lowQualityPreview && isLowQualityPreview(adaptive, width, svg);
-  const cloudimgURL = !adaptive && svg ? src : generateURL({ src, params, config, width, height });
+  const { width } = containerProps;
+  const preview = lowQualityPreview && isLowQualityPreview(adaptive, width, svg, minLowQualityWidth);
+  const cloudimgURL = !adaptive && svg ? src : generateURL({ src, params, config, containerProps });
 
   if (preview) {
-    previewCloudimgURL = getPreviewSRC({ src, params, config, ...containerProps });
+    previewCloudimgURL = getPreviewSRC({ src, params, config, containerProps });
   }
 
   return {
@@ -57,19 +59,53 @@ const getProps = ({ src, width, height, ratio, params, sizes }) => ({
 });
 
 const determineContainerProps = props => {
-  const { imgNode, config, imgNodeWidth, imgNodeHeight, imgNodeRatio, params, size } = props;
-  const { exactSize } = config;
-  let width = getWidth({ imgNode, exactSize, imgNodeWidth, params, size });
-  let height = getHeight({ imgNode, config, exactSize, imgNodeHeight, params, size });
-  let ratio = getRatio({ imgNodeRatio, width, height, size });
+  const { imgNode, config = {}, imageNodeWidth, imageNodeHeight, imageNodeRatio, params, size } = props;
+  const { ignoreNodeImgSize } = config;
+  let ratio = null;
+  const crop = isCrop(params.func || config.params.func);
+  const { exactSize, limitFactor } = config;
+  let [width, isLimit] = getWidth({
+    imgNode, config, exactSize, imageNodeWidth, params: { ...config.params, ...params }, size
+  });
+  let height = getHeight({
+    imgNode,
+    config,
+    exactSize,
+    imageNodeHeight,
+    imageNodeWidth,
+    imageNodeRatio,
+    params: { ...config.params, ...params },
+    size,
+    width
+  });
+  ratio = getRatio({ imageNodeRatio, width, height, size, config, imageNodeWidth, imageNodeHeight });
 
-  if (!height && width && ratio) {
-    height = Math.floor(width / ratio);
-  }
+  const sizes = DEVICE_PIXEL_RATIO_LIST.map(dpr => {
+    let widthWithDPR, heightWithDRP;
 
-  if (!width && height && ratio) {
-    width = Math.floor(height * ratio);
-  }
+    widthWithDPR = width && (width * dpr);
 
-  return { width, height, ratio };
+    widthWithDPR = crop ?
+      widthWithDPR
+      :
+      isLimit ?
+        getSizeLimit(widthWithDPR, exactSize, limitFactor)
+        :
+        widthWithDPR;
+
+    heightWithDRP = height && (height * dpr);
+
+    if (!heightWithDRP && widthWithDPR && ratio) {
+      heightWithDRP = Math.floor(widthWithDPR / ratio);
+    }
+
+    if (!widthWithDPR && heightWithDRP && ratio) {
+      widthWithDPR = Math.floor(heightWithDRP * ratio);
+    }
+
+    return { width: widthWithDPR, height: heightWithDRP, ratio };
+  });
+
+
+  return { sizes, ratio, width, height };
 };

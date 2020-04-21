@@ -1,4 +1,5 @@
-import { convertToPX, getSizeLimit, getParentContainerSize } from '../index';
+import { convertToPX, getParentContainerSize } from '../';
+
 
 /**
  * Get width for an image.
@@ -10,47 +11,71 @@ import { convertToPX, getSizeLimit, getParentContainerSize } from '../index';
  * 4. parent node of image computed style width (up to body tag)
  *
  * @param {HTMLImageElement} props.imgNode - image node
- * @param {Boolean} props.exactSize - a flag to use exact width/height params
- * @param {Number} props.imgNodeWidth - width of image node
+ * @param {Number} props.imageNodeWidth - width of image node
  * @param {String} props.params - params of image node
- * @return {Number} width limit
+ * @return {Array} [with, isLimit]
  */
 export const getWidth = props => {
-  const { imgNode = null, exactSize = false, imgNodeWidth = null, params = {}, size } = props;
-  const crop = params.func === 'crop';
+  const { imgNode, imageNodeWidth = null, params = {}, size, config } = props;
+  const { ignoreNodeImgSize, ignoreStyleImgSize, detectImageNodeCSS } = config;
+  const sizeParamsWidth = size && size.params && (size.params.w || size.params.width);
+  const paramsWidth = params.width || params.w;
+  const imageNodeWidthPX = !ignoreNodeImgSize && imageNodeWidth && convertToPX(imageNodeWidth);
+  const imageWidth = !ignoreStyleImgSize && getImageWidth(imgNode, detectImageNodeCSS);
+  const imageContainerWidth = !imageWidth && parseInt(getParentContainerSize(imgNode), 10);
+  const resultWidth = imageWidth || imageContainerWidth;
 
   if (size && size.params) {
-    return size.params.w || size.params.width;
+    if (size.params.r) {
+      if (params.width || params.w) {
+        return [paramsWidth];
+      }
+
+      if (!ignoreNodeImgSize && imageNodeWidth) {
+        return [imageNodeWidthPX];
+      }
+
+      return [resultWidth]
+    }
+
+    return [sizeParamsWidth];
   }
 
-  if (params.width || params.w) {
-    return params.width || params.w;
+  if (paramsWidth) {
+    return [paramsWidth];
   }
 
-  if (imgNodeWidth) {
-    return convertToPX(imgNodeWidth);
+  if (!ignoreNodeImgSize && imageNodeWidth) {
+    return [imageNodeWidthPX];
   }
 
-  const ImgContainerWidth = getImgContainerWidth(imgNode);
-
-  return crop ? ImgContainerWidth : getSizeLimit(ImgContainerWidth, exactSize);
+  return [resultWidth, true];
 };
 
 /**
- * Get container width for an image.
+ * Get width for an image.
  *
- * Priority:
- * 1. inline styling
- * 2. parent node computed style width (up to body tag)
  *
  * @param {HTMLImageElement} img - image node
+ * @param {Boolean} detectImageNodeCSS - detect width of image node
  * @return {Number} width of image container
  */
-const getImgContainerWidth = (img) => {
-  const imgStyleWidth = img && img.style && img.style.width;
-  const imgWidth = imgStyleWidth && convertToPX(imgStyleWidth);
+const getImageWidth = (img, detectImageNodeCSS) => {
+  const isImageStyleWidthInPX = img && img.style && img.style.width && !img.style.width.includes('%');
+  const imageStyleWidth = isImageStyleWidthInPX && img.style.width;
+  const imageWidth = imageStyleWidth && convertToPX(imageStyleWidth);
+  const imageCSSWidth = detectImageNodeCSS && getImageNodeCSS(img);
 
-  if (imgWidth) return parseInt(imgWidth, 10);
+  return detectImageNodeCSS && imageCSSWidth ? imageCSSWidth : imageWidth && parseInt(imageWidth, 10);
+}
 
-  return parseInt(getParentContainerSize(img), 10);
-};
+const getImageNodeCSS = img => {
+  let width;
+  const preDisplayValue = img.style.display;
+
+  img.style.display = 'inline-block';
+  width = img.getBoundingClientRect().width;
+  img.style.display = preDisplayValue;
+
+  return width;
+}
