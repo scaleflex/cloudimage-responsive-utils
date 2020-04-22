@@ -11,16 +11,16 @@ import { convertToPX, getParentContainerSize } from '../';
  * 4. parent node of image computed style width (up to body tag)
  *
  * @param {HTMLImageElement} props.imgNode - image node
- * @param {Number} props.imageNodeWidth - width of image node
+ * @param {Number} props.imgNodeWidth - width of image node
  * @param {String} props.params - params of image node
  * @return {Array} [with, isLimit]
  */
 export const getWidth = props => {
-  const { imgNode, imageNodeWidth = null, params = {}, size, config } = props;
+  const { imgNode, imgNodeWidth = null, params = {}, size, config } = props;
   const { ignoreNodeImgSize, ignoreStyleImgSize, detectImageNodeCSS } = config;
   const sizeParamsWidth = size && size.params && (size.params.w || size.params.width);
   const paramsWidth = params.width || params.w;
-  const imageNodeWidthPX = !ignoreNodeImgSize && imageNodeWidth && convertToPX(imageNodeWidth);
+  const imgNodeWidthPX = !ignoreNodeImgSize && imgNodeWidth && convertToPX(imgNodeWidth);
   const imageWidth = !ignoreStyleImgSize && getImageWidth(imgNode, detectImageNodeCSS);
   const imageContainerWidth = !imageWidth && parseInt(getParentContainerSize(imgNode), 10);
   const resultWidth = imageWidth || imageContainerWidth;
@@ -31,8 +31,8 @@ export const getWidth = props => {
         return [paramsWidth];
       }
 
-      if (!ignoreNodeImgSize && imageNodeWidth) {
-        return [imageNodeWidthPX];
+      if (!ignoreNodeImgSize && imgNodeWidth) {
+        return [imgNodeWidthPX];
       }
 
       return [resultWidth]
@@ -45,8 +45,8 @@ export const getWidth = props => {
     return [paramsWidth];
   }
 
-  if (!ignoreNodeImgSize && imageNodeWidth) {
-    return [imageNodeWidthPX];
+  if (!ignoreNodeImgSize && imgNodeWidth) {
+    return [imgNodeWidthPX];
   }
 
   return [resultWidth, true];

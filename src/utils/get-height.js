@@ -13,18 +13,18 @@ import { convertToPX, getParentContainerSize, isCrop } from '../index';
  * @param {HTMLImageElement} props.imgNode - image node
  * @param {Object} props.config - plugin config
  * @param {Boolean} props.exactSize - a flag to use exact width/height params
- * @param {Number} props.imageNodeHeight - height of image node
+ * @param {Number} props.imgNodeHeight - height of image node
  * @param {String} props.params - params of image node
  * @return {Number} height limit
  */
 export const getHeight = props => {
-  const { imgNode = null, config = {}, imageNodeHeight = null, params = {}, size, width } = props;
+  const { imgNode = null, config = {}, imgNodeHeight = null, params = {}, size, width } = props;
   const { ignoreNodeImgSize, ignoreStyleImgSize } = config;
   const crop = isCrop(params.func || config.params.func);
   const sizeParamsHeight = size && size.params && (size.params.h || size.params.height);
   const paramsRatio = size && size.params && (size.params.ratio || size.params.r);
   const paramsHeight = params.height || params.h;
-  const imageNodeHeightPX = !ignoreNodeImgSize && imageNodeHeight && convertToPX(imageNodeHeight);
+  const imgNodeHeightPX = !ignoreNodeImgSize && imgNodeHeight && convertToPX(imgNodeHeight);
   const imageHeight = !ignoreStyleImgSize && getImageHeight(imgNode);
   const imageContainerHeight = !imageHeight && parseInt(getParentContainerSize(imgNode, 'height'), 10);
 
@@ -40,8 +40,8 @@ export const getHeight = props => {
     return paramsHeight;
   }
 
-  if (!ignoreNodeImgSize && imageNodeHeight) {
-    return imageNodeHeightPX;
+  if (!ignoreNodeImgSize && imgNodeHeight) {
+    return imgNodeHeightPX;
   }
 
   if (imageHeight) {

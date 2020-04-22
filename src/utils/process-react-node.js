@@ -11,13 +11,14 @@ import {
   isCrop,
   processParams
 } from '../';
+import { DEVICE_PIXEL_RATIO_LIST } from '../constants';
 
 
 export const processReactNode = (props, imgNode, isUpdate, windowScreenBecomesBigger, lowQualityPreview = true) => {
   const imgProps = getProps(props);
   const { imgNodeSRC, params, sizes, adaptive } = imgProps;
   const { config } = props;
-  const { baseURL, presets, minLowQualityWidth } = config;
+  const { baseURL, presets, minLowQualityWidth, devicePixelRatioList } = config;
 
   if (!imgNodeSRC) return;
 
@@ -33,7 +34,12 @@ export const processReactNode = (props, imgNode, isUpdate, windowScreenBecomesBi
   const containerProps = determineContainerProps({ imgNode, config, size, ...imgProps });
   const { width } = containerProps;
   const preview = lowQualityPreview && isLowQualityPreview(adaptive, width, svg, minLowQualityWidth);
-  const cloudimgURL = !adaptive && svg ? src : generateURL({ src, params, config, containerProps });
+  const generateURLbyDPR = devicePixelRatio =>
+    !adaptive && svg ?
+      src :
+      generateURL({ src, params, config, containerProps, devicePixelRatio });
+  const cloudimgURL = generateURLbyDPR();
+  const cloudimgSRCSET = devicePixelRatioList.map(dpr => ({ dpr: dpr.toString(), url: generateURLbyDPR(dpr) }));
 
   if (preview) {
     previewCloudimgURL = getPreviewSRC({ src, params, config, containerProps });
@@ -42,6 +48,7 @@ export const processReactNode = (props, imgNode, isUpdate, windowScreenBecomesBi
   return {
     cloudimgURL,
     previewCloudimgURL,
+    cloudimgSRCSET,
     processed: true,
     preview,
     ...containerProps
@@ -59,26 +66,26 @@ const getProps = ({ src, width, height, ratio, params, sizes }) => ({
 });
 
 const determineContainerProps = props => {
-  const { imgNode, config = {}, imageNodeWidth, imageNodeHeight, imageNodeRatio, params, size } = props;
+  const { imgNode, config = {}, imgNodeWidth, imgNodeHeight, imgNodeRatio, params, size } = props;
   const { ignoreNodeImgSize } = config;
   let ratio = null;
   const crop = isCrop(params.func || config.params.func);
   const { exactSize, limitFactor } = config;
   let [width, isLimit] = getWidth({
-    imgNode, config, exactSize, imageNodeWidth, params: { ...config.params, ...params }, size
+    imgNode, config, exactSize, imgNodeWidth, params: { ...config.params, ...params }, size
   });
   let height = getHeight({
     imgNode,
     config,
     exactSize,
-    imageNodeHeight,
-    imageNodeWidth,
-    imageNodeRatio,
+    imgNodeHeight,
+    imgNodeWidth,
+    imgNodeRatio,
     params: { ...config.params, ...params },
     size,
     width
   });
-  ratio = getRatio({ imageNodeRatio, width, height, size, config, imageNodeWidth, imageNodeHeight });
+  ratio = getRatio({ imgNodeRatio, width, height, size, config, imgNodeWidth, imgNodeHeight });
 
   const sizes = DEVICE_PIXEL_RATIO_LIST.map(dpr => {
     let widthWithDPR, heightWithDRP;
