@@ -1,4 +1,6 @@
-import { convertToPX, getParentContainerSize, isCrop } from '../index';
+import { convertToPX } from '../utils/convert-to-px';
+import { getParentContainerSize } from '../utils/get-parent-container-size';
+import { isCrop } from '../utils/is-crop';
 
 
 /**

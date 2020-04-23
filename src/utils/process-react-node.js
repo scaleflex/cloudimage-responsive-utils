@@ -1,16 +1,14 @@
-import {
-  generateURL,
-  getBreakpoint,
-  getHeight,
-  getImgSRC,
-  getPreviewSRC,
-  getRatio,
-  getWidth,
-  getSizeLimit,
-  isLowQualityPreview,
-  isCrop,
-  processParams
-} from '../';
+import { generateURL } from '../utils/generate-url';
+import { getBreakpoint } from '../utils/get-breakpoint';
+import { getHeight } from '../utils/get-height';
+import { getImgSRC } from '../utils/get-img-src';
+import { getPreviewSRC } from '../utils/get-preview-src';
+import { getRatio } from '../utils/get-ratio';
+import { getWidth } from '../utils/get-width';
+import { getSizeLimit } from '../utils/get-size-limit';
+import { isLowQualityPreview } from '../utils/is-low-quality-preview';
+import { isCrop } from '../utils/is-crop';
+import { processParams } from '../utils/process-params';
 import { DEVICE_PIXEL_RATIO_LIST } from '../constants';
 
 

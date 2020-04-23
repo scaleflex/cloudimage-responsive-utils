@@ -1,4 +1,4 @@
-import { generateURL } from '../index';
+import { generateURL } from '../utils/generate-url';
 
 
 export const getPreviewSRC = ({ config, containerProps, params, src, devicePixelRatio }) => {

@@ -1,4 +1,4 @@
-import { isSVG } from '../index';
+import { isSVG } from '../utils/is-svg';
 
 
 export const getImgSRC = (src, baseURL = '') => {

@@ -1,6 +1,6 @@
 {
   "name": "cloudimage-responsive-utils",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "cloudimage responsive utils",
   "main": "dist/index.js",
   "scripts": {
@@ -32,6 +32,7 @@
     "@babel/preset-env": "^7.0.0",
     "babel-loader": "^8.0.0",
     "babel-plugin-array-includes": "^2.0.3",
-    "babel-preset-minify": "^0.5.0"
+    "babel-preset-minify": "^0.5.0",
+    "cross-env": "^7.0.2"
   }
 }

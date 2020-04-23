@@ -1,4 +1,5 @@
-import { convertToPX, getParentContainerSize } from '../';
+import { convertToPX } from '../utils/convert-to-px';
+import { getParentContainerSize } from '../utils/get-parent-container-size';
 
 
 /**
