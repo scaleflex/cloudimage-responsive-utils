@@ -36,7 +36,7 @@ export const processReactNode = (props, imgNode, isUpdate, windowScreenBecomesBi
     !adaptive && svg ?
       src :
       generateURL({ src, params, config, containerProps, devicePixelRatio });
-  const cloudimgURL = generateURLbyDPR();
+  const cloudimgURL = generateURLbyDPR(Number((window.devicePixelRatio).toFixed(1)));
   const cloudimgSRCSET = devicePixelRatioList.map(dpr => ({ dpr: dpr.toString(), url: generateURLbyDPR(dpr) }));
 
   if (preview) {
