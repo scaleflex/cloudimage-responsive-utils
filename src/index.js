@@ -19,6 +19,7 @@ export { generateURL } from './utils/generate-url';
 export { processReactNode } from './utils/process-react-node';
 export { processParams } from './utils/process-params';
 export { convertToPX } from './utils/convert-to-px';
+export { determineContainerProps } from './utils/determine-container-props';
 //* libs
 //* */
 export * as blurhash from './libs/blur-hash';
