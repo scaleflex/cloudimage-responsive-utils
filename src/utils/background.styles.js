@@ -1,10 +1,10 @@
-const container = ({ style, cloudimgURL }) => ({
+export const container = ({ style, cloudimgURL }) => ({
   position: 'relative',
   ...style,
   backgroundImage: `url(${cloudimgURL})`
 });
 
-const previewBgWrapper = ({ loaded }) => ({
+export const previewBgWrapper = ({ loaded }) => ({
   position: 'absolute',
   top: 0,
   left: 0,
@@ -17,7 +17,7 @@ const previewBgWrapper = ({ loaded }) => ({
   opacity: loaded ? '0' : '1'
 });
 
-const previewBg = ({ previewCloudimgURL }) => ({
+export const previewBg = ({ previewCloudimgURL }) => ({
   position: 'absolute',
   top: 0,
   left: 0,
@@ -28,5 +28,3 @@ const previewBg = ({ previewCloudimgURL }) => ({
   transform: 'scale(1.1)',
   filter: `blur(10px)`
 });
-
-export default { container, previewBgWrapper, previewBg };

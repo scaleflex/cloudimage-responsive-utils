@@ -1,4 +1,4 @@
-const picture = ({
+export const picture = ({
   preserveSize,
   imgNodeWidth,
   imgNodeHeight,
@@ -49,7 +49,7 @@ const getPictureHeight = ({ operation, preserveSize, imgNodeHeight }) => {
   }
 };
 
-const previewWrapper = () => ({
+export const previewWrapper = () => ({
   transform: 'translateZ(0)',
   zIndex: '1',
   height: '100%',
@@ -60,13 +60,13 @@ const previewWrapper = () => ({
   overflow: 'hidden'
 });
 
-const previewImg = ({ loaded }) => ({
+export const previewImg = ({ loaded }) => ({
   opacity: loaded ? 0 : 1,
   height: '100%',
   ...animation(true)
 });
 
-const img = ({ isPreview, loaded, operation }) => ({
+export const img = ({ isPreview, loaded, operation }) => ({
   display: 'block',
   width: getImgWidth({ operation }),
   ...getImgPosition({ operation }),
@@ -106,5 +106,3 @@ const animation = isON => ({
   transform: isON ? `scale(1.1)` : 'scale(1)',
   filter: isON ? `blur(10px)` : 'blur(0)'
 });
-
-export default { picture, previewWrapper, previewImg, img };
