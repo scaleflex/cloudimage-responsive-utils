@@ -1,6 +1,6 @@
 {
   "name": "cloudimage-responsive-utils",
-  "version": "2.0.10",
+  "version": "2.0.11",
   "description": "cloudimage responsive utils",
   "main": "dist/index.js",
   "scripts": {
