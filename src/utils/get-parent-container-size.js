@@ -4,7 +4,7 @@ export const getParentContainerSize = (img, type = 'width') => {
 
   do {
     parentNode = (parentNode && parentNode.parentNode) || img.parentNode;
-    size = parentNode.getBoundingClientRect()[type];
+    size = typeof window.document.getBoundingClientRect === 'function' ? parentNode.getBoundingClientRect()[type] : window.innerWidth;
   } while (parentNode && !size)
 
   const leftPadding = size && parentNode && parseInt(window.getComputedStyle(parentNode).paddingLeft);
