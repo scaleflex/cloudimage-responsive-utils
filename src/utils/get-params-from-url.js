@@ -16,7 +16,12 @@ const processParams = (params) => {
     });
 
     resultParams = JSON.parse(temp);
-  } catch (e) {}
+  } catch (e) { }
 
+  if (!resultParams) {
+    try {
+      resultParams = JSON.parse('{"' + decodeURI(params.replace(/&/g, "\",\"").replace(/=/g, "\":\"")) + '"}');
+    } catch (e) { }
+  }
   return resultParams;
 };
