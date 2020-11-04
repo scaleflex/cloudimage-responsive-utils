@@ -7,8 +7,9 @@ export const getParentContainerSize = (img, type = 'width') => {
     size = typeof parentNode.getBoundingClientRect === 'function' ? parentNode.getBoundingClientRect()[type] : window.innerWidth;
   } while (parentNode && !size)
 
-  const leftPadding = size && parentNode && parseInt(window.getComputedStyle(parentNode).paddingLeft);
-  const rightPadding = parseInt(window.getComputedStyle(parentNode).paddingRight)
+  const leftPadding = (size && parentNode && parentNode.nodeType === 1) ? parseInt(window.getComputedStyle(parentNode).paddingLeft) : 0
+
+  const rightPadding = (size && parentNode && parentNode.nodeType === 1) ? parseInt(window.getComputedStyle(parentNode).paddingRight) : 0
 
   return size + (size ? (-leftPadding - rightPadding) : 0);
 };
