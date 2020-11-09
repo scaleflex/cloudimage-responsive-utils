@@ -20,6 +20,11 @@ export const processReactNode = (props, imgNode, isUpdate, windowScreenBecomesBi
 
   if (adaptive) {
     size = getBreakpoint(sizes, presets);
+    if(size){
+      if(size.params.src){
+        [src, isSVG] = getImgSRC(size.params.src, baseURL);
+      }
+    }
   } else {
     if (isUpdate && !windowScreenBecomesBigger) return;
   }
