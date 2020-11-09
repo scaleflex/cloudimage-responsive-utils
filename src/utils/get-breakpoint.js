@@ -18,7 +18,7 @@ const getAdaptiveSize = (sizes, presets) => {
 };
 
 const normalizeSize = (params = {}) => {
-  let { w = params.width || '', h = params.height || '', r = params.r } = params;
+  let { w = params.width || '', h = params.height || '', r = params.r , src= params.src } = params;
 
   if ((w.toString()).indexOf('vw') > -1) {
     const percent = parseFloat(w);
@@ -36,5 +36,5 @@ const normalizeSize = (params = {}) => {
     h = parseFloat(h);
   }
 
-  return { w, h, r };
+  return { w, h, r, src };
 };
