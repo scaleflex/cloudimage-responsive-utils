@@ -15,14 +15,14 @@ export const processReactNode = (props, imgNode, isUpdate, windowScreenBecomesBi
 
   if (!imgNodeSRC) return;
 
-  const [src, svg] = getImgSRC(imgNodeSRC, baseURL);
+  let [src, svg] = getImgSRC(imgNodeSRC, baseURL);
   let previewCloudimgURL, size;
-
+  
   if (adaptive) {
     size = getBreakpoint(sizes, presets);
     if(size){
       if(size.params.src){
-        [src, isSVG] = getImgSRC(size.params.src, baseURL);
+        [src, svg] = getImgSRC(size.params.src, baseURL);
       }
     }
   } else {
