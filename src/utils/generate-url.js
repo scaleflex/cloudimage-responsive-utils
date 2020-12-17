@@ -14,12 +14,20 @@ export const generateURL = props => {
 
   return [
     processURL ? processURL({ url, token, domain, service }) : url,
-    getQueryString({ params: { ...config.params, ...params }, width, height, config, processQueryString, service })
+    getQueryString({
+      params: { ...config.params, ...params },
+      width,
+      height,
+      config,
+      processQueryString,
+      devicePixelRatio,
+      service
+    })
   ].join('');
 };
 
 const getQueryString = props => {
-  const { params = {}, width, height, config, processQueryString, service } = props;
+  const { params = {}, width, height, config, processQueryString, devicePixelRatio, service } = props;
   const { processOnlyWidth } = config;
   const [restParams, widthFromParam = null, heightFromParam] = processParamsExceptSizeRelated(params);
   const widthQ = width ? width : widthFromParam;
@@ -35,7 +43,7 @@ const getQueryString = props => {
   ].join('');
 
   return processQueryString ?
-      processQueryString({ query, widthQ, heightQ, restParamsQ, processOnlyWidth, service }) :
+      processQueryString({ query, widthQ, heightQ, restParamsQ, processOnlyWidth, devicePixelRatio, service }) :
       query;
 };
 
