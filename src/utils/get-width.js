@@ -18,7 +18,9 @@ import { getParentContainerSize } from '../utils/get-parent-container-size';
  */
 export const getWidth = props => {
   const { imgNode, imgNodeWidth = null, params = {}, size, config } = props;
-  const { ignoreNodeImgSize, ignoreStyleImgSize, detectImageNodeCSS } = config;
+  const { ignoreNodeImgSize: _ignoreNodeImgSize, ignoreStyleImgSize, imageSizeAttributes, detectImageNodeCSS } = config;
+  const ignoreNodeImgSize = typeof _ignoreNodeImgSize !== 'undefined' ?
+      _ignoreNodeImgSize : imageSizeAttributes !== 'use';
   const sizeParamsWidth = size && size.params && (size.params.w || size.params.width);
   const paramsWidth = params.width || params.w;
   const imgNodeWidthPX = !ignoreNodeImgSize && imgNodeWidth && convertToPX(imgNodeWidth);

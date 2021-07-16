@@ -1,5 +1,6 @@
 export const getRatio = ({ imgNodeRatio, width, height, size, config, imgNodeWidth, imgNodeHeight }) => {
-  const { saveNodeImgRatio, ignoreNodeImgSize } = config;
+  const { imageSizeAttributes } = config;
+  const ignoreNodeRatio = imageSizeAttributes === 'ignore';
 
   if (size && size.params) {
     if (size.params.r || size.params.ratio) {
@@ -11,10 +12,10 @@ export const getRatio = ({ imgNodeRatio, width, height, size, config, imgNodeWid
     }
   }
 
-  if (!ignoreNodeImgSize && imgNodeRatio) {
+  if (!ignoreNodeRatio && imgNodeWidth && imgNodeHeight) {
+    return  imgNodeWidth / imgNodeHeight;
+  } else if (!ignoreNodeRatio && imgNodeRatio) {
     return imgNodeRatio;
-  } else if (saveNodeImgRatio && imgNodeWidth && imgNodeHeight) {
-    return imgNodeWidth / imgNodeHeight;
   } else if (width && height) {
     return width / height;
   }

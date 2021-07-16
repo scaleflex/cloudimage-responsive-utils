@@ -21,7 +21,9 @@ import { isCrop } from '../utils/is-crop';
  */
 export const getHeight = props => {
   const { imgNode = null, config = {}, imgNodeHeight = null, params = {}, size, width } = props;
-  const { ignoreNodeImgSize, ignoreStyleImgSize } = config;
+  const { ignoreNodeImgSize: _ignoreNodeImgSize, ignoreStyleImgSize, imageSizeAttributes } = config;
+  const ignoreNodeImgSize = typeof _ignoreNodeImgSize !== 'undefined' ?
+      _ignoreNodeImgSize : imageSizeAttributes !== 'use';
   const crop = isCrop(params.func || config.params.func);
   const sizeParamsHeight = size && size.params && (size.params.h || size.params.height);
   const paramsRatio = size && size.params && (size.params.ratio || size.params.r);

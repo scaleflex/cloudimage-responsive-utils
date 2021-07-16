@@ -8,7 +8,6 @@ import { getSizeLimit } from './get-size-limit'
 
 export const determineContainerProps = props => {
   const { imgNode, config = {}, imgNodeWidth, imgNodeHeight, imgNodeRatio, params, size } = props;
-  const { ignoreNodeImgSize } = config;
   let ratio = null;
   const crop = isCrop(params.func || config.params.func);
   const { exactSize, limitFactor } = config;
