@@ -26,6 +26,11 @@ Types of changes:
 
 -------------
 
+# 2.2.0 - 2021-06-16
+### Added
+- set a custom domain property. This is useful for where a business wants to use a custom cname instead of the default 
+cloudimage.io URL.
+
 # 2.1.0 - 2020-12-17
 ### Added
 
