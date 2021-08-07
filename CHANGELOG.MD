@@ -26,6 +26,12 @@ Types of changes:
 
 -------------
 
+# 2.3.1-beta.0 - 2021-08-06
+
+### Fixed
+
+Make function getParentContainerSize more secure in case of unexpected behavior.
+
 # 2.3.0 - 2021-06-16
 ### Deprecated
 
