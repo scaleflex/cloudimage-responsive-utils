@@ -1,5 +1,7 @@
+import { isServer } from './is-server';
+
 export const getBreakpoint = (sizes, presets) => {
-  const size = getAdaptiveSize(sizes, presets);
+  const size = !isServer() ? getAdaptiveSize(sizes, presets) : [];
 
   return [...size].reverse().find(item => window.matchMedia(item.media).matches);
 };

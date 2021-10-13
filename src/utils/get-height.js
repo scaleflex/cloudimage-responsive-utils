@@ -1,6 +1,7 @@
 import { convertToPX } from '../utils/convert-to-px';
 import { getParentContainerSize } from '../utils/get-parent-container-size';
 import { isCrop } from '../utils/is-crop';
+import { isServer } from './is-server';
 
 
 /**
@@ -30,7 +31,8 @@ export const getHeight = props => {
   const paramsHeight = params.height || params.h;
   const imgNodeHeightPX = !ignoreNodeImgSize && imgNodeHeight && convertToPX(imgNodeHeight);
   const imageHeight = !ignoreStyleImgSize && getImageHeight(imgNode);
-  const imageContainerHeight = !imageHeight && parseInt(getParentContainerSize(imgNode, 'height'), 10);
+  const imageContainerHeight = !isServer() ?
+    !imageHeight && parseInt(getParentContainerSize(imgNode, 'height'), 10) : null;
 
   if (size && size.params) {
     if (paramsRatio && width) {

@@ -1,3 +1,5 @@
+import { isServer } from './is-server';
+
 export const convertToPX = (size = '') => {
   size = size.toString();
 
@@ -8,9 +10,9 @@ export const convertToPX = (size = '') => {
     // todo could be the potenial problem when the plugin set 100% width and on update it can calculate wrong value
     return null;
   } else if (size.indexOf('vw') > -1) {
-    return window.innerWidth * parseInt(size) / 100;
+    return !isServer() ? window.innerWidth * parseInt(size) / 100 : null;
   } else if (size.indexOf('vh') > -1) {
-    return window.innerHeight * parseInt(size) / 100;
+    return !isServer() ? window.innerHeight * parseInt(size) / 100 : null;
   }
 
   return parseInt(size) || null;

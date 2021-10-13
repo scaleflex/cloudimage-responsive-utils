@@ -1,5 +1,6 @@
 import { convertToPX } from '../utils/convert-to-px';
 import { getParentContainerSize } from '../utils/get-parent-container-size';
+import { isServer } from './is-server';
 
 
 /**
@@ -25,7 +26,8 @@ export const getWidth = props => {
   const paramsWidth = params.width || params.w;
   const imgNodeWidthPX = !ignoreNodeImgSize && imgNodeWidth && convertToPX(imgNodeWidth);
   const imageWidth = !ignoreStyleImgSize && getImageWidth(imgNode, detectImageNodeCSS);
-  const imageContainerWidth = !imageWidth && parseInt(getParentContainerSize(imgNode), 10);
+  const imageContainerWidth = !isServer() ?
+    !imageWidth && parseInt(getParentContainerSize(imgNode), 10) : null;
   const resultWidth = imageWidth || imageContainerWidth;
 
   if (size && size.params) {
@@ -67,7 +69,7 @@ const getImageWidth = (img, detectImageNodeCSS) => {
   const isImageStyleWidthInPX = img && img.style && img.style.width && !img.style.width.includes('%');
   const imageStyleWidth = isImageStyleWidthInPX && img.style.width;
   const imageWidth = imageStyleWidth && convertToPX(imageStyleWidth);
-  const imageCSSWidth = detectImageNodeCSS && getImageNodeCSS(img);
+  const imageCSSWidth =!isServer() ? detectImageNodeCSS && getImageNodeCSS(img) : false;
 
   return detectImageNodeCSS && imageCSSWidth ? imageCSSWidth : imageWidth && parseInt(imageWidth, 10);
 }

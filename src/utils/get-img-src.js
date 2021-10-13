@@ -1,11 +1,12 @@
 import { isSVG } from '../utils/is-svg';
+import { isServer } from './is-server';
 
 
 export const getImgSRC = (src, baseURL = '') => {
   const relativeURLPath = isRelativeUrlPath(src);
 
   if (src.indexOf('//') === 0) {
-    src = window.location.protocol + src;
+    src = !isServer() ? window.location.protocol : 'https:' + src;
   }
 
   if (relativeURLPath) {
@@ -41,7 +42,7 @@ const relativeToAbsolutePath = (base, relative) => {
 
 const getBaseURL = (root, base) => {
   if (root) {
-    return (base ? extractBaseURLFromString(base) : window.location.origin) + '/';
+    return (base ? extractBaseURLFromString(base) : (!isServer() ? window.location.origin : '')) + '/';
   } else {
     return base ? base : document.baseURI;
   }
@@ -59,7 +60,7 @@ const isRelativeUrlPath = src => {
   if (!src) return false;
 
   if (src.indexOf('//') === 0) {
-    src = window.location.protocol + src;
+    src = !isServer() ? window.location.protocol : 'https:' + src;
   }
 
   return src.indexOf('http://') !== 0 && src.indexOf('https://') !== 0 && src.indexOf('//') !== 0;
