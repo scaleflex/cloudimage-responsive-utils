@@ -22,10 +22,10 @@ import { isServer } from './is-server';
  */
 export const getHeight = props => {
   const { imgNode = null, config = {}, imgNodeHeight = null, params = {}, size, width } = props;
-  const { ignoreNodeImgSize: _ignoreNodeImgSize, ignoreStyleImgSize, imageSizeAttributes } = config;
+  const { ignoreNodeImgSize: _ignoreNodeImgSize, ignoreStyleImgSize, imageSizeAttributes, params: configParams = {} } = config;
   const ignoreNodeImgSize = typeof _ignoreNodeImgSize !== 'undefined' ?
       _ignoreNodeImgSize : imageSizeAttributes !== 'use';
-  const crop = isCrop(params.func || config.params.func);
+  const crop = isCrop(params.func || configParams.func);
   const sizeParamsHeight = size && size.params && (size.params.h || size.params.height);
   const paramsRatio = size && size.params && (size.params.ratio || size.params.r);
   const paramsHeight = params.height || params.h;
@@ -69,9 +69,12 @@ export const getHeight = props => {
  * @return {Number|null} height of image container
  */
 export const getImageHeight = (img) => {
-  const isImageStyleHeightInPX = img && img.style && img.style.height && !img.style.height.includes('%');
-  const imageStyleHeight = isImageStyleHeightInPX && img.style.height;
-  const imageHeight = convertToPX(imageStyleHeight);
+  let imageHeight;
+  let imageStyleHeight = img && img.style && img.style.height;
+  const isImageStyleHeightInPX = imageStyleHeight && !imageStyleHeight.includes('%');
+
+  imageStyleHeight = (isImageStyleHeightInPX && imageStyleHeight) || '';
+  imageHeight = convertToPX(imageStyleHeight);
 
   return imageHeight && parseInt(imageHeight, 10);
 };

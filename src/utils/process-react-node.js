@@ -11,8 +11,8 @@ import { isServer } from './is-server';
 export const processReactNode = (props, imgNode, isUpdate, windowScreenBecomesBigger, lowQualityPreview = true) => {
   const imgProps = getProps(props);
   const { imgNodeSRC, params, sizes, adaptive } = imgProps;
-  const { config } = props;
-  const { baseURL, presets, minLowQualityWidth, devicePixelRatioList } = config;
+  const { config = {} } = props;
+  const { baseURL, presets, minLowQualityWidth, devicePixelRatioList, params: configParams = {} } = config;
 
   if (!imgNodeSRC) return;
 
@@ -42,7 +42,7 @@ export const processReactNode = (props, imgNode, isUpdate, windowScreenBecomesBi
     generateURLbyDPR(Number((window.devicePixelRatio).toFixed(1))) : null;
   const cloudimgSRCSET = !isServer() ?
     devicePixelRatioList.map(dpr => ({ dpr: dpr.toString(), url: generateURLbyDPR(dpr) })) : null;
-  const operation = params.func || config.func;
+  const operation = params.func || configParams.func;
 
   if (preview) {
     previewCloudimgURL = getPreviewSRC({ src, params, config, containerProps });

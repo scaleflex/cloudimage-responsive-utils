@@ -44,7 +44,7 @@ const getBaseURL = (root, base) => {
   if (root) {
     return (base ? extractBaseURLFromString(base) : (!isServer() ? window.location.origin : '')) + '/';
   } else {
-    return base ? base : document.baseURI;
+    return base ? base : (!isServer() ? document.baseURI : 'http://localhost:3000/');
   }
 };
 

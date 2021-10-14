@@ -18,7 +18,7 @@ import { isServer } from './is-server';
  * @return {Array} [with, isLimit]
  */
 export const getWidth = props => {
-  const { imgNode, imgNodeWidth = null, params = {}, size, config } = props;
+  const { imgNode, imgNodeWidth = null, params = {}, size, config = {} } = props;
   const { ignoreNodeImgSize: _ignoreNodeImgSize, ignoreStyleImgSize, imageSizeAttributes, detectImageNodeCSS } = config;
   const ignoreNodeImgSize = typeof _ignoreNodeImgSize !== 'undefined' ?
       _ignoreNodeImgSize : imageSizeAttributes !== 'use';
