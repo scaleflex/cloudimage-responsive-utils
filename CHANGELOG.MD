@@ -26,6 +26,10 @@ Types of changes:
 
 -------------
 
+# 2.4.0-beta.3 - 2021-10-14
+### Changed
+- better support for SSR (render placeholders with correct sizes via SSR stage)
+
 # 2.3.0 - 2021-06-16
 ### Added
 - new property: 
