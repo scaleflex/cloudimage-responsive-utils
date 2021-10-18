@@ -1,7 +1,7 @@
 import { isServer } from './is-server';
 
 export const convertToPX = (size = '') => {
-  size = size.toString();
+  size = (size || '').toString();
 
   if (size.indexOf('px') > -1) {
     return parseInt(size);
@@ -15,5 +15,5 @@ export const convertToPX = (size = '') => {
     return !isServer() ? window.innerHeight * parseInt(size) / 100 : null;
   }
 
-  return parseInt(size) || null;
+  return parseInt(size) || '';
 };
