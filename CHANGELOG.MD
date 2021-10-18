@@ -26,6 +26,10 @@ Types of changes:
 
 -------------
 
+# 2.4.0-beta.4 - 2021-10-18
+### FIXED
+- problem with convertToPX function
+
 # 2.4.0-beta.3 - 2021-10-14
 ### Changed
 - better support for SSR (render placeholders with correct sizes via SSR stage)
