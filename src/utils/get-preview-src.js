@@ -1,7 +1,7 @@
 import { generateURL } from '../utils/generate-url';
 
 
-export const getPreviewSRC = ({ config, containerProps, params, src, devicePixelRatio }) => {
+export const getPreviewSRC = ({ config = {}, containerProps, params, src, devicePixelRatio }) => {
   const { width, height } = containerProps;
   const { previewQualityFactor } = config;
   const previewParams = { ...params, ci_info: '' };

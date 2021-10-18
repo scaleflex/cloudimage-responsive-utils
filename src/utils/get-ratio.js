@@ -1,4 +1,4 @@
-export const getRatio = ({ imgNodeRatio, width, height, size, config, imgNodeWidth, imgNodeHeight }) => {
+export const getRatio = ({ imgNodeRatio, width, height, size, config = {}, imgNodeWidth, imgNodeHeight }) => {
   const { imageSizeAttributes } = config;
   const ignoreNodeRatio = imageSizeAttributes === 'ignore';
 

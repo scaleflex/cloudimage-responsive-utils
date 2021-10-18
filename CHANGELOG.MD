@@ -26,17 +26,11 @@ Types of changes:
 
 -------------
 
-# 2.3.1-beta.0 - 2021-08-06
-
-### Fixed
-
-Make function getParentContainerSize more secure in case of unexpected behavior.
+# 2.4.0-beta.3 - 2021-10-14
+### Changed
+- better support for SSR (render placeholders with correct sizes via SSR stage)
 
 # 2.3.0 - 2021-06-16
-### Deprecated
-
-Property **ignoreNodeImgSize** is deprecated. Use **imageSizeAttributes: 'ignore'** instead
-
 ### Added
 - new property: 
 

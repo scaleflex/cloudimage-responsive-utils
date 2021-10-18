@@ -5,13 +5,14 @@ import { getPreviewSRC } from '../utils/get-preview-src';
 import { isLowQualityPreview } from '../utils/is-low-quality-preview';
 import { processParams } from '../utils/process-params';
 import { determineContainerProps } from '../utils/determine-container-props';
+import { isServer } from './is-server';
 
 
 export const processReactNode = (props, imgNode, isUpdate, windowScreenBecomesBigger, lowQualityPreview = true) => {
   const imgProps = getProps(props);
   const { imgNodeSRC, params, sizes, adaptive } = imgProps;
-  const { config } = props;
-  const { baseURL, presets, minLowQualityWidth, devicePixelRatioList } = config;
+  const { config = {} } = props;
+  const { baseURL, presets, minLowQualityWidth, devicePixelRatioList, params: configParams = {} } = config;
 
   if (!imgNodeSRC) return;
 
@@ -31,14 +32,17 @@ export const processReactNode = (props, imgNode, isUpdate, windowScreenBecomesBi
 
   const containerProps = determineContainerProps({ imgNode, config, size, ...imgProps });
   const { width } = containerProps;
-  const preview = lowQualityPreview && isLowQualityPreview(adaptive, width, svg, minLowQualityWidth);
+  const preview = !isServer() ?
+    lowQualityPreview && isLowQualityPreview(adaptive, width, svg, minLowQualityWidth) : null;
   const generateURLbyDPR = devicePixelRatio =>
     !adaptive && svg ?
       src :
       generateURL({ src, params, config, containerProps, devicePixelRatio });
-  const cloudimgURL = generateURLbyDPR(Number((window.devicePixelRatio).toFixed(1)));
-  const cloudimgSRCSET = devicePixelRatioList.map(dpr => ({ dpr: dpr.toString(), url: generateURLbyDPR(dpr) }));
-  const operation = params.func || config.func;
+  const cloudimgURL = !isServer() ?
+    generateURLbyDPR(Number((window.devicePixelRatio).toFixed(1))) : null;
+  const cloudimgSRCSET = !isServer() ?
+    devicePixelRatioList.map(dpr => ({ dpr: dpr.toString(), url: generateURLbyDPR(dpr) })) : null;
+  const operation = params.func || configParams.func;
 
   if (preview) {
     previewCloudimgURL = getPreviewSRC({ src, params, config, containerProps });
