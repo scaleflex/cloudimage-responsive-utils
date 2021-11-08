@@ -5,12 +5,13 @@ export const generateURL = props => {
   const { src, params, config = {}, containerProps, devicePixelRatio = 1, processURL, processQueryString, service } = props;
   const size = containerProps && containerProps.sizes[DEVICE_PIXEL_RATIO_LIST.indexOf(devicePixelRatio)];
   const { width, height } = size || {};
-  const { token, domain, doNotReplaceURL, customDomain } = config;
+  const { token, domain, doNotReplaceURL, customDomain, apiVersion } = config;
 
   const finalDomain = customDomain ? domain : token + '.' + domain;
+  const finalApiVersion = apiVersion ? apiVersion + '/' : '';
 
   const url =[
-      doNotReplaceURL ? '' : `https://${finalDomain}/v7/`,
+      doNotReplaceURL ? '' : `https://${finalDomain}/${finalApiVersion}`,
       src,
       src.includes('?') ? '&' : '?'
   ].join('');
