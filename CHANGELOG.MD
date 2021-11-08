@@ -25,6 +25,9 @@ Types of changes:
 - ...
 
 -------------
+# 2.4.0-beta.5 - 2021-11-08
+### ADDED
+- possibility to change api version
 
 # 2.4.0-beta.4 - 2021-10-18
 ### FIXED
