@@ -25,6 +25,9 @@ Types of changes:
 - ...
 
 -------------
+# 2.4.1 - 2021-12-09
+### FIXED
+- img-src starts with "//"
 # 2.4.0 - 2021-11-08
 ### ADDED
 - possibility to change api version
