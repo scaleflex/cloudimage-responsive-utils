@@ -25,6 +25,9 @@ Types of changes:
 - ...
 
 -------------
+# 2.4.2 - 2021-01-04
+### FIXED
+- remove hardcoded ci_info query parameter to fix image caching
 # 2.4.1 - 2021-12-09
 ### FIXED
 - img-src starts with "//"
