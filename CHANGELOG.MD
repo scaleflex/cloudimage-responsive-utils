@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+# 2.4.3 - 2021-02-09
+### FIXED
+- change devicePixelRatioList to [1, 1.5, 2]
+
 # 2.4.2 - 2021-01-04
 ### FIXED
 - remove hardcoded ci_info query parameter to fix image caching
