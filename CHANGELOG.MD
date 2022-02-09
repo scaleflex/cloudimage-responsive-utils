@@ -25,6 +25,9 @@ Types of changes:
 - ...
 
 -------------
+# 2.4.4 - 2021-02-09
+### FIXED
+- typo in version
 # 2.4.3 - 2021-02-09
 ### FIXED
 - change devicePixelRatioList to [1, 1.5, 2]
