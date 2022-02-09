@@ -1,1 +1,1 @@
-export const DEVICE_PIXEL_RATIO_LIST = [1, 1.5, 2, 3, 4];
+export const DEVICE_PIXEL_RATIO_LIST = [1, 1.5, 2];
