@@ -6,7 +6,7 @@ export const getPreviewSRC = ({ config = {}, containerProps, params, src, device
   const { previewQualityFactor } = config;
   const lowQualitySize = getLowQualitySize({ width, height }, previewQualityFactor);
 
-  return generateURL({ src, config, params: { ...params, ...lowQualitySize }, devicePixelRatio });
+  return generateURL({ src, config, containerProps, params: { ...params, ...lowQualitySize }, devicePixelRatio });
 };
 
 const getLowQualitySize = (params = {}, factor) => {
