@@ -10,6 +10,7 @@ import { isServer } from './is-server';
 
 export const processReactNode = (props, imgNode, isUpdate, windowScreenBecomesBigger, lowQualityPreview = true) => {
   const imgProps = getProps(props);
+
   const { imgNodeSRC, params, sizes, adaptive } = imgProps;
   const { config = {} } = props;
   const { baseURL, presets, minLowQualityWidth, devicePixelRatioList, params: configParams = {} } = config;
@@ -18,7 +19,7 @@ export const processReactNode = (props, imgNode, isUpdate, windowScreenBecomesBi
 
   let [src, svg] = getImgSRC(imgNodeSRC, baseURL);
   let previewCloudimgURL, size;
-  
+
   if (adaptive) {
     size = getBreakpoint(sizes, presets);
     if(size){
@@ -60,13 +61,14 @@ export const processReactNode = (props, imgNode, isUpdate, windowScreenBecomesBi
   };
 };
 
-const getProps = ({ src, width, height, ratio, params, sizes }) => ({
+const getProps = ({ src, width, height, ratio, params, sizes, doNotReplaceURL }) => ({
   imgNodeSRC: src || '',
   imgNodeWidth: width || null,
   imgNodeHeight: height || null,
   imgNodeRatio: ratio,
   params: processParams(params),
   sizes: sizes,
-  adaptive: !!sizes
+  adaptive: !!sizes,
+  doNotReplaceImageUrl: doNotReplaceURL || false
 });
 
