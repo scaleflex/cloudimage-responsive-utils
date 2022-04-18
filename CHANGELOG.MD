@@ -25,14 +25,18 @@ Types of changes:
 - ...
 
 -------------
-# 2.4.4 - 2021-02-09
+# 2.4.5 - 2022-04-18
+### Added
+- possibility to add `doNotReplaceURL` to single image
+
+# 2.4.4 - 2022-02-09
 ### FIXED
 - typo in version
-# 2.4.3 - 2021-02-09
+# 2.4.3 - 2022-02-09
 ### FIXED
 - change devicePixelRatioList to [1, 1.5, 2]
 
-# 2.4.2 - 2021-01-04
+# 2.4.2 - 2022-01-04
 ### FIXED
 - remove hardcoded ci_info query parameter to fix image caching
 # 2.4.1 - 2021-12-09
