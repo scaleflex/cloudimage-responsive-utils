@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+# 2.4.7 - 2022-04-25
+### Fixed
+- Image width params
+
 # 2.4.6 - 2022-04-18
 ### Fixed
 - images size with `disableAnimation` prop
