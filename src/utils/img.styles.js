@@ -24,6 +24,11 @@ export const picture = ({
     })
 });
 
+export const image = ({preserveSize, operation, imgNodeWidth, imgNodeHeight }) => ({
+  width: getPictureWidth({ operation, preserveSize, imgNodeWidth }),
+  height: getPictureHeight({ operation, preserveSize, imgNodeHeight }),
+});
+
 const getPictureWidth = ({ operation, preserveSize, imgNodeWidth }) => {
   if (preserveSize && imgNodeWidth) {
     return imgNodeWidth;

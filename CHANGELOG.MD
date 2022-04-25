@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+# 2.4.6 - 2022-04-18
+### Fixed
+- images size with `disableAnimation` prop
+
 # 2.4.5 - 2022-04-18
 ### Added
 - possibility to add `doNotReplaceURL` to single image
