@@ -68,6 +68,7 @@ export const previewWrapper = () => ({
 export const previewImg = ({ loaded }) => ({
   opacity: loaded ? 0 : 1,
   height: '100%',
+  width: '100%',
   ...animation(true)
 });
 
