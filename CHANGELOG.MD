@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+# 2.4.8 - 2022-04-25
+### Fixed
+- Low preview image width
+
 # 2.4.7 - 2022-04-25
 ### Fixed
 - Image width params
