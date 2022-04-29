@@ -1,12 +1,18 @@
 import { generateURL } from '../utils/generate-url';
 
 
-export const getPreviewSRC = ({ config = {}, containerProps, params, src, devicePixelRatio }) => {
-  const { width, height } = containerProps;
+export const getPreviewSRC = ({ config = {}, containerProps: _containerProps, params, src, devicePixelRatio }) => {
+  const { width, height, sizes, ...restContainerProps } = _containerProps;
   const { previewQualityFactor } = config;
   const lowQualitySize = getLowQualitySize({ width, height }, previewQualityFactor);
 
-  return generateURL({ src, config, containerProps, params: { ...params, ...lowQualitySize }, devicePixelRatio });
+  return generateURL({
+      src,
+      config,
+      containerProps: restContainerProps,
+      params: { ...params, ...lowQualitySize },
+      devicePixelRatio
+    });
 };
 
 const getLowQualitySize = (params = {}, factor) => {
