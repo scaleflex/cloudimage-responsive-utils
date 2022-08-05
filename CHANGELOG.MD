@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+# 2.4.10 - 2022-08-05
+### Fixed
+- undefined host name when add relative src
+
 # 2.4.9 - 2022-04-29
 ### Fixed
 - Low preview image width
