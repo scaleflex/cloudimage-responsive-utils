@@ -22,8 +22,11 @@ const relativeToAbsolutePath = (base, relative) => {
   const stack = resultBaseURL.split('/');
   const parts = relative.split('/');
 
-  stack.pop(); // remove current file name (or empty string)
-               // (omit if 'base' is the current folder without trailing slash)
+  if (stack.length > 1) {
+    stack.pop(); // remove current file name (or empty string)
+    // (omit if 'base' is the current folder without trailing slash)
+  }
+
   if (root) {
     parts.shift();
   }
@@ -53,7 +56,11 @@ const extractBaseURLFromString = (path = '') => {
   const protocol = pathArray[0];
   const host = pathArray[2];
 
-  return protocol + '//' + host;
+  if (protocol && host) {
+    return protocol + '//' + host;
+  }
+
+  return path
 };
 
 const isRelativeUrlPath = src => {
