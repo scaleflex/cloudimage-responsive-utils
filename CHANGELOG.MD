@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+# 2.5.1 - 2022-08-05
+### Fixed
+- CHANGELOG
+
 # 2.5.0 - 2022-08-05
 ### Added
 - Possibility to generate missing alt for images
