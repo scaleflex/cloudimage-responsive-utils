@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+# 2.5.0 - 2022-08-05
+### Added
+- Possibility to generate missing alt for images
+
 # 2.4.10 - 2022-08-05
 ### Fixed
 - undefined host name when add relative src

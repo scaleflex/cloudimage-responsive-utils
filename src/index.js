@@ -20,6 +20,8 @@ export { processReactNode } from './utils/process-react-node';
 export { processParams } from './utils/process-params';
 export { convertToPX } from './utils/convert-to-px';
 export { determineContainerProps } from './utils/determine-container-props';
+export { generateAlt } from './utils/generate-alt';
+
 export * as imgStyles from './utils/img.styles';
 export * as blurHashImgStyes from './utils/blur-hash-img.styles';
 export * as backgroundStyles from './utils/background.styles';
