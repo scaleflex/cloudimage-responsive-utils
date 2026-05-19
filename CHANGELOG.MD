@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+# 2.5.2 - 2026-05-19
+### Added
+- DPR 3 support: extend default `DEVICE_PIXEL_RATIO_LIST` to `[1, 1.5, 2, 3]` so iPhone and other DPR=3 devices receive a 3x image in `srcset` instead of falling back to 2x.
+
 # 2.5.1 - 2022-08-05
 ### Fixed
 - CHANGELOG
